@@ -1,149 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Slab Fascia — Gliding Plane Friction Matrix | Sovereign Field Guide</title>
-  <meta name="description" content="Analyze thoracolumbar and lateral line tissue adhesion, reset fascial geometry, and consult James Roberts directly.">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slab Fascia | The Mechanics of Structural Unspooling</title>
+    <style>
+        :root {
+            --bg-color: #0c0c0e;
+            --surface-color: #141417;
+            --surface-border: #232328;
+            --text-primary: #f4f4f6;
+            --text-secondary: #9a9a9f;
+            --accent-color: #d4af37; /* Understated sovereign gold */
+            --accent-hover: #e5c158;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --max-width: 720px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+        }
+
+        header {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--surface-border);
+            padding-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .network-link {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .network-link:hover {
+            color: var(--accent-color);
+        }
+
+        section {
+            margin-bottom: 3.5rem;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+            border-left: 3px solid var(--accent-color);
+            padding-left: 0.75rem;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            font-size: 1.05rem;
+        }
+
+        .lead {
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: 6px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        ul {
+            list-style: none;
+            margin-bottom: 1.25rem;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        ul li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        ul li strong {
+            color: var(--text-primary);
+        }
+
+        .cta-box {
+            background-color: var(--surface-color);
+            border: 1px solid var(--accent-color);
+            border-radius: 6px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .cta-box h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        footer {
+            border-top: 1px solid var(--surface-border);
+            padding-top: 2rem;
+            margin-top: 4rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pricing-tag {
+            font-family: monospace;
+            color: var(--accent-color);
+        }
+    </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <span class="network-brand">SOVEREIGN NETWORK</span>
-      <nav>
-        <a href="#matrix">Friction Matrix</a>
-        <a href="#trajectory">Trajectory</a>
-        <a href="#about-james">About James</a>
-        <a href="#chat" class="chat-trigger-nav">Consult James</a>
-      </nav>
-    </div>
-  </header>
 
-  <main class="content-container">
-    <!-- Hero Section -->
-    <section class="hero-section">
-      <h1 id="hero-title">Fascia is the body's frame.</h1>
-      <p id="hero-intro" class="hero-intro">Slab friction and gliding planes determine structural range. Here is how to release tissue adhesion without buying a protocol, a course, or a recurring app subscription.</p>
-    </section>
+<div class="container">
+    <header>
+        <a href="#" class="logo">Slab Fascia</a>
+        <a href="#" class="network-link">Sovereign Network Hub</a>
+    </header>
 
-    <!-- Interactive Chat Interface Component -->
-    <section id="chat" class="chat-workbench">
-      <div class="chat-box-wrapper">
-        <div class="chat-header">
-          <span class="bot-identity">JAMES — ARCHITECT</span>
-          <span class="status-indicator">Online</span>
-        </div>
-        <div id="briefing-display" class="chat-output">
-          Tell me what the tissue is doing today. Experiencing deep sheet adhesion, lateral hip restriction, or shoulder girdle locking?
-        </div>
-        <div class="chat-input-area">
-          <textarea id="architect-input" placeholder="Input query..."></textarea>
-          <button id="send-btn">Consult the Architect →</button>
-        </div>
-      </div>
-    </section>
+    <main>
+        <section>
+            <h1>The Physics of Structural Unspooling.</h1>
+            <p class="lead">Fascia is not soft tissue to be massaged; it is a load-bearing architectural sheet that calcifies into a dense, car-tire slab under repetitive micro-trauma. Here is how you break the adhesion.</p>
+        </section>
 
-    <!-- Core Content Sections (Domain-Specific Slab Fascia Tool) -->
-    <section class="editorial-sections">
-      <article id="matrix" class="editorial-block">
-        <span class="block-number">01</span>
-        <h2>THE GLIDING PLANE FRICTION MATRIX</h2>
-        <p>Fascia relies on fluid slide between fascial layers. When chronic loading occurs, adjacent sheets dehydrate and fuse into a single solid sheet. Select a friction zone to analyze:</p>
-        
-        <div class="interactive-matrix">
-          <!-- Anatomical SVG Reference Pane -->
-          <div class="matrix-visual-container">
-            <svg class="skeleton-map" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
-              <ellipse cx="100" cy="40" rx="18" ry="22" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
-              <line x1="100" y1="62" x2="100" y2="90" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
-              <!-- Fascia slab plane overlays -->
-              <rect x="75" y="95" width="50" height="90" rx="4" fill="var(--accent-color)" opacity="0.7" stroke="currentColor" stroke-width="1"/>
-              <line x1="75" y1="140" x2="125" y2="140" stroke="var(--bg-color)" stroke-width="2"/>
-              <line x1="100" y1="185" x2="100" y2="280" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-            </svg>
-            <span class="visual-caption">Slab adhesion &amp; interfacial shear</span>
-          </div>
+        <section>
+            <h2>01. The Nature of the Slab</h2>
+            <p>Hydration alone cannot rescue dehydrated fascia. Whether a man works manual labor in high heat or sits locked at a desk, gravitational load and static tension bake the tissue down layer by layer.</p>
+            <p>The skin stops flowing like silk over the frame. It shrinks, develops a tight sheen with micro-crimples, and forms rigid choke points—from the rubber-block tension at the base of the skull down to the locked, sensitive shins that restrict lower-leg development.</p>
+        </section>
 
-          <div class="matrix-triggers">
-            <button class="matrix-btn active" data-target="thoracolumbar">Thoracolumbar Fascia</button>
-            <button class="matrix-btn" data-target="iliotibial">IT Band / Lateral Line</button>
-            <button class="matrix-btn" data-target="deep-front">Deep Front Line</button>
-          </div>
-          <div id="matrix-display" class="matrix-panel">
-            <strong>Thoracolumbar Adhesion Profile:</strong> The superficial and deep layers of the back fascia have fused, preventing independent sliding between the latissimus dorsi and lumbar spine during twisting.
-          </div>
-        </div>
-      </article>
+        <section>
+            <h2>02. The Protocol: Two Hands & Heat</h2>
+            <div class="card">
+                <ul>
+                    <li><strong>Two Hands, Two Fingers:</strong> Never rely on passive tools or single-handed touch. Use two fingers on each hand to cross-friction and isolate the boundaries of the plaque.</li>
+                    <li><strong>External Catalysts:</strong> When a single zone limits your leverage, introduce heat—sunlight, warm water, or a rotational Chinese burn—to force the hardened matrix to yield.</li>
+                    <li><strong>Multi-Planar Release:</strong> Shift away from single-plane stretching. Force the tissue to shear sideways, upward, and rotational until glide is fully restored.</li>
+                </ul>
+            </div>
+        </section>
 
-      <article id="trajectory" class="editorial-block">
-        <span class="block-number">02</span>
-        <h2>THE TISSUE ADAPTATION TIMELINE</h2>
-        <p>What structural release actually looks like across the timeline when you restore hydration and mechanical shear.</p>
-        
-        <div class="timeline-grid">
-          <div class="timeline-item">
-            <span class="time-label">Day 1</span>
-            <p>Initial mechanical shear reduction. Hyaluronic acid viscosity drops with targeted micro-pressure.</p>
-          </div>
-          <div class="timeline-item">
-            <span class="time-label">Day 5</span>
-            <p>Interfacial gliding resumes between major muscle groups, lowering overall baseline muscle tone.</p>
-          </div>
-          <div class="timeline-item">
-            <span class="time-label">Day 7</span>
-            <p>First unrestricted multi-planar movement cycle without compensatory hitching in adjacent joints.</p>
-          </div>
-          <div class="timeline-item">
-            <span class="time-label">Month 1</span>
-            <p>Slab rehydration takes permanent hold. Chronic morning stiffness disappears entirely.</p>
-          </div>
-          <div class="timeline-item">
-            <span class="time-label">Month 3</span>
-            <p>Fascial tensile strength remodels along primary lines of stress rather than defensive guarding patterns.</p>
-          </div>
-          <div class="timeline-item">
-            <span class="time-label">Month 6</span>
-            <p>Structural baseline achieved. Tissue resilience resists re-adhesion under heavy or repetitive loads.</p>
-          </div>
-        </div>
-      </article>
+        <section>
+            <h2>03. Sovereign Execution</h2>
+            <p>You do not need a clinic, a physical therapist, or a wellness subscription to reclaim your framework. The tools are already on your hands. Test your structure, identify your compression zones, and systematically unspool the frame in absolute privacy.</p>
+        </section>
 
-      <article id="about-james" class="editorial-block">
-        <span class="block-number">03</span>
-        <h2>ABOUT JAMES &amp; THE METHODOLOGY</h2>
-        <p>Operated independently from Tenerife, Canary Islands. Built on decades of international travel, hospitality operations, and structural observation—away from the noise of corporate clinics and wellness algorithms.</p>
-        <div class="about-card">
-          <p>After hosting thousands of guests and operating independent service businesses, the realization was simple: people don't need another generic app tracking their steps or locking them into monthly subscriptions. They need uncompromised, direct access to expert mechanical logic that respects their intelligence and time.</p>
-        </div>
-      </article>
+        <section>
+            <h2>04. Network Access</h2>
+            <p>Access the core unspooling mechanics and unlock specialized routing across the entire sovereign domain network.</p>
+            
+            <div class="cta-box">
+                <h3>Unlock the Network</h3>
+                <p>Complete structural unspooling protocols and cross-domain access.</p>
+                <div class="pricing-tag">€60 / 365 Days — Zero Auto-Renewals</div>
+                <br>
+                <a href="#" class="btn">Get Network Pass</a>
+            </div>
+        </section>
+    </main>
 
-      <article class="editorial-block conversion-banner">
-        <span class="block-number">04</span>
-        <h2>DIRECT ACCESS — €60 FOR 365 DAYS</h2>
-        <p class="conversion-intro">The encyclopedia entries are completely free because structural mechanics shouldn't be paywalled. But reading a guide doesn't answer what your specific fascia is doing tonight.</p>
-        
-        <div class="conversion-box">
-          <h3>No Auto-Renew. No Hidden Traps.</h3>
-          <p>You pay sixty euros once. Your access remains active for a full 365 days (tracked cleanly with zero background tracking pixels or cookies). When the year ends, your access simply expires unless you choose to renew manually.</p>
-          <a href="#chat" class="conversion-cta">Unlock 365 Days of Access (€60) →</a>
-        </div>
-      </article>
-    </section>
-  </main>
+    <footer>
+        <div>Part of the Sovereign Network Ecosystem</div>
+        <div>Minimalist Architecture &bull; No Tracking Pixels</div>
+    </footer>
+</div>
 
-  <footer class="site-footer">
-    <div class="footer-content">
-      <p>Operated by James Roberts, Tenerife. Independent of every clinic, in both directions.</p>
-      <div class="footer-links">
-        <a href="#privacy">Privacy Policy</a>
-        <a href="#terms">Terms &amp; 365-Day Access</a>
-        <a href="#refund">Refund Policy</a>
-      </div>
-    </div>
-  </footer>
-
-  <script src="site-config.js"></script>
-  <script src="main.js"></script>
 </body>
 </html>

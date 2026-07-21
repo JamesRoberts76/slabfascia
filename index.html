@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slab Fascia | The Mechanics of Back Unspooling</title>
+    <title>Slab Fascia | Tissue Restoration &amp; Gliding Planes</title>
     <style>
         :root {
             --bg-color: #0c0c0e;
@@ -11,8 +11,9 @@
             --surface-border: #232328;
             --text-primary: #f4f4f6;
             --text-secondary: #9a9a9f;
-            --accent-color: #d4af37; /* Understated sovereign gold */
+            --accent-color: #d4af37;
             --accent-hover: #e5c158;
+            --danger-color: #8b3a3a;
             --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             --max-width: 720px;
         }
@@ -28,23 +29,47 @@
             color: var(--text-primary);
             font-family: var(--font-main);
             line-height: 1.6;
-            padding: 2rem 1rem;
+            padding: clamp(1rem, 3vw, 2rem) 1rem;
             display: flex;
             justify-content: center;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 450px;
+            height: 450px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23d4af37' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M50 95 V25 C50 15 65 10 75 15 C85 20 80 35 65 40 M50 75 C40 75 30 70 25 60 C20 50 30 40 45 45 M50 55 C60 55 70 50 75 40'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
             width: 100%;
             max-width: var(--max-width);
+            position: relative;
+            z-index: 1;
         }
 
         header {
             margin-bottom: 3rem;
             border-bottom: 1px solid var(--surface-border);
             padding-bottom: 1.5rem;
+        }
+
+        .header-top {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
+            margin-bottom: 1rem;
         }
 
         .logo {
@@ -56,14 +81,21 @@
             text-decoration: none;
         }
 
-        .network-link {
+        .nav-tabs {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-tabs a {
             font-size: 0.85rem;
             color: var(--text-secondary);
             text-decoration: none;
             transition: color 0.2s ease;
+            cursor: pointer;
         }
 
-        .network-link:hover {
+        .nav-tabs a:hover {
             color: var(--accent-color);
         }
 
@@ -72,7 +104,7 @@
         }
 
         h1 {
-            font-size: 2.25rem;
+            font-size: clamp(1.8rem, 4vw, 2.25rem);
             font-weight: 600;
             letter-spacing: -0.02em;
             margin-bottom: 1rem;
@@ -80,7 +112,7 @@
         }
 
         h2 {
-            font-size: 1.35rem;
+            font-size: clamp(1.2rem, 3vw, 1.35rem);
             font-weight: 600;
             margin-bottom: 1rem;
             letter-spacing: -0.01em;
@@ -92,11 +124,11 @@
         p {
             color: var(--text-secondary);
             margin-bottom: 1.25rem;
-            font-size: 1.05rem;
+            font-size: clamp(0.98rem, 2vw, 1.05rem);
         }
 
         .lead {
-            font-size: 1.15rem;
+            font-size: clamp(1.05rem, 2.5vw, 1.15rem);
             color: var(--text-primary);
             margin-bottom: 2rem;
         }
@@ -132,6 +164,92 @@
             color: var(--text-primary);
         }
 
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 600px) {
+            .comparison-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .comparison-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .fan-canvas {
+            width: 100%;
+            height: 220px;
+            background-color: #121216;
+            border: 1px solid var(--surface-border);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fan-canvas svg {
+            max-height: 190px;
+            width: auto;
+        }
+
+        .comparison-card h3 {
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .comparison-card p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .visual-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 600px) {
+            .visual-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .visual-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: 6px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visual-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid var(--surface-border);
+            padding-bottom: 0.4rem;
+        }
+
+        .visual-card p {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
         .cta-box {
             background-color: var(--surface-color);
             border: 1px solid var(--accent-color);
@@ -157,9 +275,150 @@
             text-decoration: none;
             margin-top: 1rem;
             transition: background-color 0.2s ease;
+            cursor: pointer;
+            border: none;
         }
 
         .btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Immersive Full-Screen Portal Interface */
+        .immersive-portal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--bg-color);
+            z-index: 2000;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .immersive-portal.active {
+            display: flex;
+        }
+
+        .portal-header {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 2rem 1rem 1.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--surface-border);
+        }
+
+        .portal-title {
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .portal-exit {
+            background: none;
+            border: 1px solid var(--surface-border);
+            color: var(--text-secondary);
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .portal-exit:hover {
+            border-color: var(--accent-color);
+            color: var(--text-primary);
+        }
+
+        .portal-body {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            flex: 1;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .portal-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .portal-message {
+            background-color: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .portal-message.system {
+            border-left: 3px solid var(--accent-color);
+            color: var(--text-primary);
+        }
+
+        .portal-message.user {
+            background-color: #121216;
+            border-color: var(--accent-color);
+            color: var(--text-primary);
+            align-self: flex-end;
+            width: 85%;
+        }
+
+        .portal-input-container {
+            position: sticky;
+            bottom: 0;
+            background-color: var(--bg-color);
+            padding: 1rem 0 2rem 0;
+            border-top: 1px solid var(--surface-border);
+            display: flex;
+            gap: 0.75rem;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .portal-textarea {
+            flex: 1;
+            background-color: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: 6px;
+            padding: 0.85rem 1rem;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: var(--font-main);
+            resize: none;
+            height: 54px;
+            outline: none;
+        }
+
+        .portal-textarea:focus {
+            border-color: var(--accent-color);
+        }
+
+        .portal-submit {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            padding: 0 1.75rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .portal-submit:hover {
             background-color: var(--accent-hover);
         }
 
@@ -169,9 +428,31 @@
             margin-top: 4rem;
             font-size: 0.85rem;
             color: var(--text-secondary);
+        }
+
+        .footer-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
         }
 
         .pricing-tag {
@@ -184,57 +465,223 @@
 
 <div class="container">
     <header>
-        <a href="#" class="logo">Slab Fascia</a>
-        <a href="#" class="network-link">Sovereign Network Hub</a>
+        <div class="header-top">
+            <a href="#" class="logo">Slab Fascia</a>
+            <nav class="nav-tabs">
+                <a href="#friction">Friction</a>
+                <a href="#planes">Gliding Planes</a>
+                <a href="#origin">The Origin</a>
+                <a href="#restoration">Restoration</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#legal">Legal &amp; Terms</a>
+            </nav>
+        </div>
     </header>
 
     <main>
+        <!-- Opening Section -->
         <section>
-            <h1>The Slab Back. Unspooling the Spinal Armor.</h1>
-            <p class="lead">The back does not stiffen from weakness; it calcifies into a thick, unyielding slab of deadened fascia. Here is the mechanical reality of spinal compression and how to break the armor.</p>
+            <h1>Tissue Restoration &amp; Gliding Planes</h1>
+            <p class="lead">Chronic tension is rarely a matter of weak muscle. It is the result of high slab friction—dense fascial sheets locked together where natural gliding planes have seized up.</p>
+            
+            <div class="card" style="border-left: 3px solid var(--accent-color);">
+                <h3 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">What is Slab Friction?</h3>
+                <p style="font-size: 0.95rem; margin-bottom: 0;">Fascial layers are designed to slide over one another smoothly like wet silk. Under sustained compression, fluid is squeezed out, creating adhesive bonds that weld separate tissue sheets into a single, immobile slab.</p>
+            </div>
+
+            <p>Standard therapies fail because they target isolated local spots or treat muscle tissue like passive meat. True tissue restoration requires understanding how to mechanically separate fused gliding planes and reintroduce fluid shear across the frame.</p>
         </section>
 
+        <!-- Friction & Restoration Architecture -->
         <section>
-            <h2>01. The Nature of the Spinal Slab</h2>
-            <p>Hydration and rest cannot rescue a back locked by deep fascial adhesion. Whether through intense physical labor in the heat or prolonged static posture, the layers of the back fuse together into a rigid, car-tire sheet.</p>
-            <p>The skin loses its silk-like glide over the vertebrae and ribs. The rubber-block choke at the base of the skull locks downward, pulling the entire posterior chain taut, locking the lower back, and draining your daily energy currency.</p>
-        </section>
+            <h2>The Mechanics of Shear: Bound vs. Gliding</h2>
+            <p>When tissue is locked in high friction, movement requires excessive force and generates constant dull drag. Restoring the glide transforms your structural mechanics entirely.</p>
+            
+            <div class="comparison-grid">
+                <div class="comparison-card" style="border-color: var(--danger-color);">
+                    <div class="fan-canvas">
+                        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="45" y="25" width="70" height="110" rx="6" fill="none" stroke="#8b3a3a" stroke-width="2"/>
+                            <line x1="45" y1="50" x2="115" y2="50" stroke="#8b3a3a" stroke-width="1.5"/>
+                            <line x1="45" y1="75" x2="115" y2="75" stroke="#8b3a3a" stroke-width="2"/>
+                            <line x1="45" y1="100" x2="115" y2="100" stroke="#8b3a3a" stroke-width="1.5"/>
+                            <text x="80" y="148" fill="#8b3a3a" font-size="9" font-family="monospace" text-anchor="middle">LOCKED PLANES</text>
+                        </svg>
+                    </div>
+                    <span style="font-size: 0.75rem; color: var(--danger-color); font-family: monospace; display: block; margin-bottom: 0.35rem;">BOUND STATE</span>
+                    <h3>High Slab Friction</h3>
+                    <p>Fascial sheets glued solid. Zero relative motion between layers, resulting in constant internal drag.</p>
+                </div>
 
-        <section>
-            <h2>02. The Protocol: Two Hands & Heat</h2>
-            <div class="card">
-                <ul>
-                    <li><strong>Two Hands, Two Fingers:</strong> Never rely on passive rolling or single-handed pressure. Use two fingers on each hand to cross-friction and isolate the boundaries of the back plaque.</li>
-                    <li><strong>External Catalysts:</strong> When spinal tension locks your leverage, introduce heat—warm water or direct sunlight—to force the hardened posterior matrix to yield.</li>
-                    <li><strong>Multi-Planar Release:</strong> Shift away from static single-plane bending. Force the tissue of the back to shear laterally and rotationally until spinal glide is fully restored.</li>
-                </ul>
+                <div class="comparison-card" style="border-color: var(--accent-color);">
+                    <div class="fan-canvas">
+                        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M80 20 C105 25 125 50 120 80 C115 110 100 135 80 140 C60 135 45 110 40 80 C35 50 55 25 80 20 Z" fill="none" stroke="#d4af37" stroke-width="2"/>
+                            <circle cx="80" cy="80" r="14" fill="none" stroke="#d4af37" stroke-width="2"/>
+                            <text x="80" y="148" fill="#d4af37" font-size="9" font-family="monospace" text-anchor="middle">FLUID SHEAR</text>
+                        </svg>
+                    </div>
+                    <span style="font-size: 0.75rem; color: var(--accent-color); font-family: monospace; display: block; margin-bottom: 0.35rem;">RESTORATION STATE</span>
+                    <h3>Gliding Planes Active</h3>
+                    <p>Independent multi-directional layer sliding. Effortless mechanical transmission and restored local fluid exchange.</p>
+                </div>
             </div>
         </section>
 
-        <section>
-            <h2>03. Sovereign Execution</h2>
-            <p>You do not need a clinic, a chiropractor, or a wellness subscription to reclaim your posture. The tools are on your own hands. Test your back, identify your spinal compression zones, and systematically unspool the frame in absolute privacy.</p>
+        <!-- Origin Section -->
+        <section id="origin">
+            <h2>The Origin: Experience Over Academic Theory</h2>
+            <div class="card">
+                <p>Decades spent navigating consulting rooms, physical therapists, and specialists revealed a massive blind spot: medicine understands anatomy in isolation, but ignores how layered tissue sheets stick together under load.</p>
+                <p>This protocol is born from direct practical experimentation—mapping how tissue responds to precise mechanical shear and restoring independent gliding capabilities without reliance on external clinics.</p>
+                <p style="margin-bottom: 0;">Absolute sovereignty means mastering your own tissue mechanics.</p>
+            </div>
         </section>
 
-        <section>
-            <h2>04. Network Access</h2>
-            <p>Access the core unspooling mechanics for the back and unlock specialized routing across the entire sovereign domain network.</p>
+        <!-- Pricing & CTA -->
+        <section id="pricing">
+            <h2>The Sovereign Network Hub &amp; Pricing Policy</h2>
+            <p>Engineered with dry British precision. When you are ready to dismantle slab friction and restore independent gliding planes across your frame, engage the study portal.</p>
             
             <div class="cta-box">
-                <h3>Unlock the Network</h3>
-                <p>Complete spinal unspooling protocols and cross-domain access.</p>
+                <h3>Unlock Tissue Restoration</h3>
+                <p>Direct, uncompromised access to deep tissue unspooling frameworks and plane restoration protocols.</p>
                 <div class="pricing-tag">€60 / 365 Days — Zero Auto-Renewals</div>
+                <p style="font-size: 0.85rem; margin-top: 0.75rem; color: var(--text-secondary);">Pricing Policy: One flat annual fee. No hidden subscription traps, no surprise recurring billing, and zero automatic renewals.</p>
                 <br>
-                <a href="#" class="btn">Get Network Pass</a>
+                <button class="btn" id="openPortalBtn" type="button">Secure Full Access Now</button>
             </div>
+        </section>
+
+        <section id="legal" style="margin-top: 4rem; border-top: 1px solid var(--surface-border); padding-top: 2rem;">
+            <h2>Terms, Conditions &amp; Policies</h2>
+            <h3 style="font-size: 1.1rem; color: var(--text-primary); margin-top: 1.5rem; margin-bottom: 0.5rem;">Terms &amp; Conditions</h3>
+            <p style="font-size: 0.95rem;">By accessing slabfascia.guide, you operate under your own sovereign authority. Protocols are educational frameworks for self-treatment and do not constitute formal medical diagnosis.</p>
+            <h3 style="font-size: 1.1rem; color: var(--text-primary); margin-top: 1.5rem; margin-bottom: 0.5rem;">Privacy Policy</h3>
+            <p style="font-size: 0.95rem;">Absolute data privacy is foundational. Zero tracking pixels, no intrusive third-party cookies, and no data harvesting.</p>
+            <h3 style="font-size: 1.1rem; color: var(--text-primary); margin-top: 1.5rem; margin-bottom: 0.5rem;">Refund Policy</h3>
+            <p style="font-size: 0.95rem;">Annual access fees are final upon activation due to the immediate digital delivery of unspooling frameworks.</p>
         </section>
     </main>
 
     <footer>
-        <div>Part of the Sovereign Network Ecosystem</div>
-        <div>Minimalist Architecture &bull; No Tracking Pixels</div>
+        <div class="footer-content">
+            <div>Part of the Sovereign Network Ecosystem &bull; Built by James</div>
+            <div class="footer-links">
+                <a href="#friction">Friction</a>
+                <a href="#planes">Gliding Planes</a>
+                <a href="#origin">The Origin</a>
+                <a href="#pricing">Pricing Policy</a>
+                <a href="#legal">Privacy</a>
+                <a href="#legal">Terms</a>
+                <a href="#legal">Refunds</a>
+            </div>
+        </div>
+        <div style="font-size: 0.8rem; color: var(--text-secondary);">Minimalist Architecture &bull; No Tracking Pixels &bull; Absolute Sovereignty</div>
     </footer>
 </div>
+
+<!-- Immersive Full-Screen Practice Portal -->
+<div class="immersive-portal" id="immersivePortal">
+    <div class="portal-header">
+        <div class="portal-title">Sovereign Network &bull; Architectural Study</div>
+        <button class="portal-exit" id="closePortalBtn" type="button">Return to Guide</button>
+    </div>
+    <div class="portal-body">
+        <div class="portal-feed" id="portalFeed">
+            <div class="portal-message system">
+                <strong>The Architect:</strong> Sovereign session initialized. Context is maintained across the network matrix. State your tissue restriction or gliding plane query.
+            </div>
+        </div>
+    </div>
+    <div class="portal-input-container">
+        <div style="width: 100%; max-width: var(--max-width); margin: 0 auto; display: flex; gap: 0.75rem; padding: 0 1rem;">
+            <textarea class="portal-textarea" id="portalInput" placeholder="Describe your tissue friction or restriction..."></textarea>
+            <button class="portal-submit" id="portalSubmit" type="button">Engage</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        const openBtn = document.getElementById('openPortalBtn');
+        const portal = document.getElementById('immersivePortal');
+        const closeBtn = document.getElementById('closePortalBtn');
+        const submitBtn = document.getElementById('portalSubmit');
+        const inputField = document.getElementById('portalInput');
+        const feedContainer = document.getElementById('portalFeed');
+
+        let userUuid = localStorage.getItem('sovereign_user_uuid') || 'user_' + Math.random().toString(36).substring(2, 11);
+        localStorage.setItem('sovereign_user_uuid', userUuid);
+
+        function togglePortal(e) {
+            if (e) e.preventDefault();
+            portal.classList.toggle('active');
+            if (portal.classList.contains('active')) {
+                inputField.focus();
+            }
+        }
+
+        if (openBtn) openBtn.addEventListener('click', togglePortal);
+        if (closeBtn) closeBtn.addEventListener('click', () => portal.classList.remove('active'));
+
+        async function handlePortalMessage() {
+            const text = inputField.value.trim();
+            if (!text) return;
+
+            const userDiv = document.createElement('div');
+            userDiv.className = 'portal-message user';
+            userDiv.textContent = text;
+            feedContainer.appendChild(userDiv);
+            inputField.value = '';
+            portal.scrollTo({ top: portal.scrollHeight, behavior: 'smooth' });
+
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'portal-message system';
+            loadingDiv.innerHTML = '<strong>The Architect:</strong> Analyzing tissue mechanics across network matrix...';
+            feedContainer.appendChild(loadingDiv);
+            portal.scrollTo({ top: portal.scrollHeight, behavior: 'smooth' });
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        siteId: 'slabfascia.guide',
+                        message: text,
+                        uuid: userUuid
+                    })
+                });
+
+                const data = await response.json();
+                loadingDiv.remove();
+
+                const systemDiv = document.createElement('div');
+                systemDiv.className = 'portal-message system';
+                systemDiv.innerHTML = `<strong>The Architect:</strong> ${data.message || 'Error processing request.'}`;
+                feedContainer.appendChild(systemDiv);
+                portal.scrollTo({ top: portal.scrollHeight, behavior: 'smooth' });
+            } catch (err) {
+                loadingDiv.remove();
+                const errDiv = document.createElement('div');
+                errDiv.className = 'portal-message system';
+                errDiv.innerHTML = '<strong>The Architect:</strong> Connection error across network matrix. Verify worker bindings.';
+                feedContainer.appendChild(errDiv);
+                portal.scrollTo({ top: portal.scrollHeight, behavior: 'smooth' });
+            }
+        }
+
+        if (submitBtn) submitBtn.addEventListener('click', handlePortalMessage);
+        if (inputField) {
+            inputField.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handlePortalMessage();
+                }
+            });
+        }
+    })();
+</script>
 
 </body>
 </html>

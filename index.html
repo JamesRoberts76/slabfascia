@@ -3,191 +3,389 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slab Fascia | Tissue Restoration &amp; Gliding Planes</title>
+    <meta name="description" content="An objective look at dense fascial plating, tissue rigidity, and restoring mechanical responsiveness.">
+    <title>SLABFASCIA.GUIDE // DENSE FASCIAL PLATING & TISSUE RIGIDITY</title>
+    <link rel="stylesheet" href="/styles.css">
     <style>
         :root {
             --bg-color: #0c0c0e;
             --surface-color: #141417;
-            --surface-border: #232328;
-            --text-primary: #f4f4f6;
-            --text-secondary: #9a9a9f;
-            --accent-color: #d4af37;
-            --accent-hover: #e5c158;
+            --surface-border: #222226;
+            --text-primary: #ededed;
+            --text-muted: #88888d;
+            --accent-gold: #d4af37;
+            --accent-gold-dim: rgba(212, 175, 55, 0.1);
+            --accent-green: #2ecc71;
+            --accent-green-dim: rgba(46, 204, 113, 0.1);
             --danger-color: #8b3a3a;
-            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            --max-width: 720px;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            --radius: 6px;
+            --transition-fast: 150ms ease;
+            --transition-base: 250ms ease;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        @media (prefers-reduced-motion: reduce) {
+            * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
         }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
         body {
             background-color: var(--bg-color);
             color: var(--text-primary);
-            font-family: var(--font-main);
-            line-height: 1.6;
-            padding: clamp(1rem, 3vw, 2rem) 1rem;
+            font-family: var(--font-mono);
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
-            position: relative;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 2rem 1.5rem;
+            line-height: 1.5;
+            background-image: 
+                radial-gradient(circle at 85% 10%, rgba(212, 175, 55, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 15% 90%, rgba(212, 175, 55, 0.02) 0%, transparent 50%);
+            background-attachment: fixed;
         }
-
-        body::before {
-            content: "";
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 450px;
-            height: 450px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23d4af37' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M50 95 V25 C50 15 65 10 75 15 C85 20 80 35 65 40 M50 75 C40 75 30 70 25 60 C20 50 30 40 45 45 M50 55 C60 55 70 50 75 40'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
-            opacity: 0.06;
-            pointer-events: none;
-            z-index: 0;
-        }
-
+        ::selection { background: var(--accent-gold-dim); color: var(--text-primary); }
         .container {
+            max-width: 840px;
             width: 100%;
-            max-width: var(--max-width);
-            position: relative;
-            z-index: 1;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
         }
-
-        header {
-            margin-bottom: 3rem;
-            border-bottom: 1px solid var(--surface-border);
-            padding-bottom: 1.5rem;
-        }
-
-        .header-top {
+        .top-nav {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 1rem;
-        }
-
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: 0.15em;
+            align-items: center;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
+            border-bottom: 1px solid var(--surface-border);
+            padding-bottom: 1rem;
+        }
+        .brand-logo {
+            font-weight: 700;
             color: var(--text-primary);
+            letter-spacing: 0.15em;
             text-decoration: none;
+            white-space: nowrap;
         }
-
-        .nav-tabs {
+        .nav-links {
             display: flex;
-            gap: 1.25rem;
-            flex-wrap: wrap;
+            gap: 1.5rem;
+            list-style: none;
         }
-
-        .nav-tabs a {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+        .nav-links a {
+            color: var(--text-muted);
             text-decoration: none;
-            transition: color 0.2s ease;
+            transition: color var(--transition-fast);
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-gold);
+            transition: width var(--transition-base);
+        }
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 1px solid var(--surface-border);
+            color: var(--text-primary);
+            padding: 0.4rem 0.6rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
             cursor: pointer;
+            border-radius: var(--radius);
         }
-
-        .nav-tabs a:hover {
-            color: var(--accent-color);
-        }
-
-        section {
-            margin-bottom: 3.5rem;
-        }
-
+        header { display: flex; flex-direction: column; gap: 0.5rem; }
         h1 {
-            font-size: clamp(1.8rem, 4vw, 2.25rem);
+            font-size: clamp(1.4rem, 4vw, 1.75rem);
             font-weight: 600;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        h2 {
-            font-size: clamp(1.2rem, 3vw, 1.35rem);
-            font-weight: 600;
-            margin-bottom: 1rem;
             letter-spacing: -0.01em;
             color: var(--text-primary);
-            border-left: 3px solid var(--accent-color);
-            padding-left: 0.75rem;
         }
-
-        p {
-            color: var(--text-secondary);
-            margin-bottom: 1.25rem;
-            font-size: clamp(0.98rem, 2vw, 1.05rem);
+        .site-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 720px;
+            line-height: 1.6;
         }
-
-        .lead {
-            font-size: clamp(1.05rem, 2.5vw, 1.15rem);
-            color: var(--text-primary);
-            margin-bottom: 2rem;
-        }
-
-        .card {
+        .chat-portal-section {
             background-color: var(--surface-color);
             border: 1px solid var(--surface-border);
-            border-radius: 6px;
-            padding: 1.75rem;
-            margin-bottom: 1.5rem;
+            border-radius: var(--radius);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
-
-        ul {
-            list-style: none;
-            margin-bottom: 1.25rem;
+        .chat-portal-header {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--surface-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            text-transform: uppercase;
         }
-
-        ul li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.75rem;
-            color: var(--text-secondary);
-        }
-
-        ul li::before {
-            content: "—";
-            position: absolute;
-            left: 0;
-            color: var(--accent-color);
-        }
-
-        ul li strong {
+        .architect-info {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
             color: var(--text-primary);
+            font-weight: 600;
         }
-
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            color: var(--accent-green);
+            font-size: 0.7rem;
+        }
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+        .chat-messages {
+            height: 380px;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            scroll-behavior: smooth;
+        }
+        .message {
+            max-width: 85%;
+            padding: 0.85rem 1.15rem;
+            font-size: 0.95rem;
+            border-radius: var(--radius);
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease-out;
+            word-wrap: break-word;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .message.assistant {
+            background-color: #1a1a1f;
+            border: 1px solid #2a2a30;
+            color: var(--text-primary);
+            align-self: flex-start;
+            border-top-left-radius: 2px;
+        }
+        .message.user {
+            background-color: #222228;
+            color: var(--text-primary);
+            align-self: flex-end;
+            border-top-right-radius: 2px;
+        }
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            background-color: #1a1a1f;
+            border: 1px solid #2a2a30;
+            border-radius: var(--radius);
+            border-top-left-radius: 2px;
+            padding: 0.85rem 1.15rem;
+            gap: 0.3rem;
+        }
+        .typing-indicator.active { display: flex; }
+        .typing-indicator span {
+            width: 6px;
+            height: 6px;
+            background: var(--text-muted);
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite ease-in-out both;
+        }
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typingBounce {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+        .chat-suggestions {
+            padding: 0.75rem 1.25rem;
+            background-color: #101013;
+            border-top: 1px solid var(--surface-border);
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none;
+        }
+        .chat-suggestions::-webkit-scrollbar { display: none; }
+        .suggestion-chip {
+            background-color: var(--bg-color);
+            border: 1px solid var(--surface-border);
+            color: var(--text-muted);
+            padding: 0.4rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            transition: all var(--transition-fast);
+            flex-shrink: 0;
+        }
+        .suggestion-chip:hover {
+            color: var(--accent-gold);
+            border-color: var(--accent-gold);
+            background-color: var(--accent-gold-dim);
+        }
+        .chat-input-area {
+            padding: 1rem;
+            background-color: var(--surface-color);
+            border-top: 1px solid var(--surface-border);
+            display: flex;
+            gap: 0.75rem;
+            align-items: stretch;
+            flex-direction: column;
+        }
+        .chat-input-row {
+            display: flex;
+            gap: 0.75rem;
+            align-items: stretch;
+        }
+        .chat-input-wrapper {
+            display: flex;
+            flex: 1;
+            background-color: var(--bg-color);
+            border: 1px solid var(--surface-border);
+            border-radius: 4px;
+            padding: 0.6rem 0.85rem;
+            transition: border-color var(--transition-fast);
+            min-height: 44px;
+            align-items: center;
+        }
+        .chat-input-wrapper:focus-within { border-color: var(--accent-gold); }
+        .chat-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            outline: none;
+            resize: none;
+            min-height: 20px;
+            max-height: 120px;
+        }
+        .chat-input::placeholder { color: var(--text-muted); }
+        .send-btn {
+            background-color: var(--accent-gold);
+            color: var(--bg-color);
+            border: none;
+            border-radius: 4px;
+            padding: 0.6rem 1.25rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity var(--transition-fast), transform var(--transition-fast);
+            white-space: nowrap;
+        }
+        .send-btn:hover { opacity: 0.9; }
+        .send-btn:active { transform: scale(0.98); }
+        .send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .chat-disclaimer {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-align: center;
+            letter-spacing: 0.02em;
+        }
+        section { display: flex; flex-direction: column; gap: 1rem; }
+        .section-title {
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+        }
+        .evolution-panel {
+            background-color: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            text-align: center;
+        }
+        .evolution-graphic {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--surface-border);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            gap: 0.5rem;
+        }
+        .evolution-node {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
+            flex: 1;
+        }
+        .evolution-icon {
+            width: 48px;
+            height: 48px;
+            border: 1px solid var(--surface-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-color);
+            color: var(--accent-gold);
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        .evolution-arrow {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .evolution-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
         .comparison-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 1.5rem;
-            margin-bottom: 1.5rem;
         }
-
-        @media (min-width: 600px) {
-            .comparison-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        @media (min-width: 640px) {
+            .comparison-grid { grid-template-columns: repeat(2, 1fr); }
         }
-
         .comparison-card {
             background-color: var(--surface-color);
             border: 1px solid var(--surface-border);
-            border-radius: 6px;
+            border-radius: var(--radius);
             padding: 1.5rem;
             text-align: center;
         }
-
         .fan-canvas {
             width: 100%;
-            height: 220px;
+            height: 200px;
             background-color: #121216;
             border: 1px solid var(--surface-border);
             border-radius: 4px;
@@ -198,532 +396,802 @@
             position: relative;
             overflow: hidden;
         }
-
-        .fan-canvas svg {
-            max-height: 190px;
-            width: auto;
+        .fan-canvas svg { max-height: 170px; width: auto; }
+        .comparison-label {
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            display: block;
+            margin-bottom: 0.35rem;
+            letter-spacing: 0.05em;
         }
-
         .comparison-card h3 {
             font-size: 1.15rem;
             color: var(--text-primary);
             margin-bottom: 0.5rem;
         }
-
-        .comparison-card p {
-            font-size: 0.9rem;
-            margin-bottom: 0;
-        }
-
-        .visual-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.25rem;
-            margin-bottom: 1.5rem;
-        }
-
-        @media (min-width: 600px) {
-            .visual-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .visual-card {
+        .comparison-card p { font-size: 0.95rem; color: var(--text-muted); }
+        .case-snapshot {
             background-color: var(--surface-color);
             border: 1px solid var(--surface-border);
-            border-radius: 6px;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .case-quote {
+            font-size: 1.05rem;
+            color: var(--text-primary);
+            font-style: italic;
+            line-height: 1.6;
+            border-left: 2px solid var(--accent-gold);
+            padding-left: 1rem;
+        }
+        .case-author {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .depth-details {
+            background-color: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+        .depth-summary {
+            padding: 1.25rem 1.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            background-color: #101013;
+            list-style: none;
+            transition: background-color var(--transition-fast);
+        }
+        .depth-summary:hover { background-color: #16161a; color: var(--text-primary); }
+        .depth-summary::-webkit-details-marker { display: none; }
+        .depth-summary .chevron {
+            transition: transform var(--transition-base);
+            display: inline-block;
+        }
+        .depth-details[open] .depth-summary .chevron { transform: rotate(180deg); }
+        .depth-content {
+            padding: 1.5rem;
+            border-top: 1px solid var(--surface-border);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .safety-cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        @media (min-width: 768px) { .safety-cards-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .safety-cards-grid { grid-template-columns: repeat(3, 1fr); } }
+        .safety-card {
+            background-color: var(--bg-color);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            height: 100%;
+        }
+        .safety-card-canvas {
+            width: 100%;
+            height: 160px;
+            background-color: #111115;
+            border: 1px solid var(--surface-border);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 1.25rem;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .safety-card-canvas svg { max-height: 130px; width: auto; }
+        .safety-card-step {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            font-size: 0.65rem;
+            color: var(--accent-gold);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            background-color: rgba(20, 20, 23, 0.9);
+            border: 1px solid var(--surface-border);
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            z-index: 10;
+        }
+        .safety-card-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .safety-card-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+        .safety-card-wrapper-full {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        .safety-card-full {
+            background-color: var(--bg-color);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+        }
+        .trajectory-list { display: flex; flex-direction: column; gap: 0.75rem; }
+        .trajectory-item {
+            background-color: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius);
+            padding: 1rem 1.25rem;
+            display: grid;
+            grid-template-columns: 90px 1fr;
+            gap: 1rem;
+            align-items: center;
+        }
+        .trajectory-day {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .trajectory-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        .text-block {
+            background-color: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .access-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.25rem;
+        }
+        .access-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .access-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 540px;
+            line-height: 1.6;
+        }
+        .cta-btn {
+            background-color: var(--accent-gold);
+            color: var(--bg-color);
+            border: none;
+            border-radius: 4px;
+            padding: 0.75rem 1.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity var(--transition-fast), transform var(--transition-fast);
+            display: inline-block;
+        }
+        .cta-btn:hover { opacity: 0.9; }
+        .cta-btn:active { transform: scale(0.98); }
+        .node-cluster-bar {
+            background-color: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius);
             padding: 1.25rem;
             display: flex;
             flex-direction: column;
-        }
-
-        .visual-card h3 {
-            font-size: 1.1rem;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-            border-bottom: 1px solid var(--surface-border);
-            padding-bottom: 0.4rem;
-        }
-
-        .visual-card p {
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .cta-box {
-            background-color: var(--surface-color);
-            border: 1px solid var(--accent-color);
-            border-radius: 6px;
-            padding: 2rem;
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        .cta-box h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-            color: var(--text-primary);
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            font-weight: 600;
-            padding: 0.75rem 2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            margin-top: 1rem;
-            transition: background-color 0.2s ease;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn:hover {
-            background-color: var(--accent-hover);
-        }
-
-        /* Immersive Full-Screen Portal Interface */
-        .immersive-portal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: var(--bg-color);
-            z-index: 2000;
-            flex-direction: column;
-            overflow-y: auto;
-        }
-
-        .immersive-portal.active {
-            display: flex;
-        }
-
-        .portal-header {
-            width: 100%;
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 2rem 1rem 1.5rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--surface-border);
-        }
-
-        .portal-title {
-            font-size: 0.9rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--accent-color);
-            font-weight: 600;
-        }
-
-        .portal-exit {
-            background: none;
-            border: 1px solid var(--surface-border);
-            color: var(--text-secondary);
-            padding: 0.4rem 1rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .portal-exit:hover {
-            border-color: var(--accent-color);
-            color: var(--text-primary);
-        }
-
-        .portal-body {
-            width: 100%;
-            max-width: var(--max-width);
-            margin: 0 auto;
-            flex: 1;
-            padding: 2rem 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .portal-feed {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .portal-message {
-            background-color: var(--surface-color);
-            border: 1px solid var(--surface-border);
-            border-radius: 6px;
-            padding: 1.5rem;
-            font-size: 1.05rem;
-            line-height: 1.6;
-        }
-
-        .portal-message.system {
-            border-left: 3px solid var(--accent-color);
-            color: var(--text-primary);
-        }
-
-        .portal-message.user {
-            background-color: #121216;
-            border-color: var(--accent-color);
-            color: var(--text-primary);
-            align-self: flex-end;
-            width: 85%;
-        }
-
-        .portal-input-container {
-            position: sticky;
-            bottom: 0;
-            background-color: var(--bg-color);
-            padding: 1rem 0 2rem 0;
-            border-top: 1px solid var(--surface-border);
-            display: flex;
             gap: 0.75rem;
-            max-width: var(--max-width);
-            margin: 0 auto;
-            width: 100%;
         }
-
-        .portal-textarea {
-            flex: 1;
-            background-color: var(--surface-color);
+        .cluster-title {
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        .pill-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .pill {
+            background-color: var(--bg-color);
             border: 1px solid var(--surface-border);
-            border-radius: 6px;
-            padding: 0.85rem 1rem;
+            color: var(--text-muted);
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+        .pill:hover {
             color: var(--text-primary);
-            font-size: 1rem;
-            font-family: var(--font-main);
-            resize: none;
-            height: 54px;
-            outline: none;
+            border-color: var(--text-muted);
+            background-color: #1a1a1f;
         }
-
-        .portal-textarea:focus {
-            border-color: var(--accent-color);
-        }
-
-        .portal-submit {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            font-weight: 600;
-            border: none;
-            border-radius: 6px;
-            padding: 0 1.75rem;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-
-        .portal-submit:hover {
-            background-color: var(--accent-hover);
-        }
-
         footer {
-            border-top: 1px solid var(--surface-border);
-            padding-top: 2rem;
-            margin-top: 4rem;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        .footer-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            border-top: 1px solid var(--surface-border);
+            padding-top: 1.5rem;
+            margin-top: 1rem;
             gap: 1rem;
         }
-
-        .footer-links {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
+        footer div { display: flex; gap: 1.5rem; }
+        footer a {
+            color: var(--text-muted);
             text-decoration: none;
-            transition: color 0.2s ease;
+            transition: color var(--transition-fast);
         }
-
-        .footer-links a:hover {
-            color: var(--accent-color);
+        footer a:hover { color: var(--text-primary); }
+        @media (max-width: 640px) {
+            .trajectory-item { grid-template-columns: 1fr; gap: 0.35rem; }
+            .top-nav { position: relative; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: calc(100% + 0.5rem);
+                right: 0;
+                flex-direction: column;
+                background: var(--surface-color);
+                border: 1px solid var(--surface-border);
+                padding: 1rem;
+                border-radius: var(--radius);
+                min-width: 180px;
+                z-index: 100;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            }
+            .nav-links.open { display: flex; }
+            .nav-toggle { display: block; }
+            .evolution-graphic { flex-direction: column; gap: 1rem; }
+            .evolution-arrow { transform: rotate(90deg); }
+            .chat-input-row { flex-direction: column; }
+            .send-btn { width: 100%; padding: 0.75rem; }
+            footer { flex-direction: column; align-items: flex-start; }
+            .chat-messages { height: 320px; }
         }
-
-        .pricing-tag {
-            font-family: monospace;
-            color: var(--accent-color);
+        a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, textarea:focus-visible {
+            outline: 2px solid var(--accent-gold);
+            outline-offset: 2px;
         }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: #2a2a30; border-radius: 4px; }
     </style>
+<base target="_blank">
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <div class="header-top">
-            <a href="#" class="logo">Slab Fascia</a>
-            <nav class="nav-tabs">
-                <a href="#friction">Friction</a>
-                <a href="#planes">Gliding Planes</a>
-                <a href="#origin">The Origin</a>
-                <a href="#restoration">Restoration</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#legal">Legal &amp; Terms</a>
-            </nav>
-        </div>
-    </header>
+    <div class="container">
+        <nav class="top-nav" aria-label="Primary">
+            <a href="https://compressed.guide" class="brand-logo">SlabFascia.Guide</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">Menu</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#evolution">The Approach</a></li>
+                <li><a href="#protocols">Protocols</a></li>
+                <li><a href="#about">About James</a></li>
+                <li><a href="#access">Access</a></li>
+            </ul>
+        </nav>
 
-    <main>
-        <!-- Opening Section -->
-        <section>
-            <h1>Tissue Restoration &amp; Gliding Planes</h1>
-            <p class="lead">Chronic tension stems from high slab friction—dense fascial sheets locked together where natural gliding planes have seized up under load.</p>
-            
-            <div class="card" style="border-left: 3px solid var(--accent-color);">
-                <h3 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">What is Slab Friction?</h3>
-                <p style="font-size: 0.95rem; margin-bottom: 0;">Fascial layers are designed to slide over one another smoothly like wet silk. Under sustained compression and gravity, fluid is squeezed out, creating adhesive bonds that weld separate tissue sheets into a single, immobile slab.</p>
+        <header>
+            <h1>When Fascia Flattens Into Load-Bearing Plate.</h1>
+            <div class="site-subtitle">
+                An objective look at dense fascial plating, tissue rigidity, and restoring mechanical responsiveness. Initial consultations are complimentary.
             </div>
+        </header>
 
-            <p>Standard modalities miss this because practitioners target isolated local spots or treat standard tissue without accounting for layer mechanics. True tissue restoration requires separating fused gliding planes and reintroducing fluid shear across the frame.</p>
+        <div class="chat-portal-section" role="region" aria-label="Consultation chat">
+            <div class="chat-portal-header">
+                <div class="architect-info">
+                    <span>James — Advisory Node</span>
+                </div>
+                <div class="status-indicator" aria-live="polite">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    <span>Online</span>
+                </div>
+            </div>
+            <div class="chat-messages" id="chatMessages" aria-live="polite" aria-atomic="false">
+                <div class="message assistant">
+                    Before we talk about slab formation, try this: press your thumb into your outer thigh. You might feel a solid plate with no give. Now try the same on your forearm after a warm shower. You might feel distinct structures moving independently. That difference is slab fascia versus responsive tissue. Where are you noticing the density most today?
+                </div>
+            </div>
+            <div class="typing-indicator" id="typingIndicator" aria-hidden="true">
+                <span></span><span></span><span></span>
+            </div>
+            <div class="chat-suggestions" id="chatSuggestions">
+                <button class="suggestion-chip" data-prompt="Slab test">Slab test</button>
+                <button class="suggestion-chip" data-prompt="Density check">Density check</button>
+                <button class="suggestion-chip" data-prompt="Plate release">Plate release</button>
+                <button class="suggestion-chip" data-prompt="Signs of responsiveness">Signs of responsiveness</button>
+            </div>
+            <div class="chat-input-area">
+                <div class="chat-input-row">
+                    <div class="chat-input-wrapper">
+                        <textarea class="chat-input" id="chatInput" rows="1" placeholder="Describe what you are noticing..." aria-label="Message"></textarea>
+                    </div>
+                    <button class="send-btn" id="sendBtn">Send</button>
+                </div>
+                <div class="chat-disclaimer">
+                    General postural guidance only, not medical treatment. For persistent or acute pain, consult a qualified clinician.
+                </div>
+            </div>
+        </div>
+
+        <section id="evolution" aria-labelledby="evolution-title">
+            <div class="section-title" id="evolution-title">01 / The Structural Shift</div>
+            <div class="evolution-panel">
+                <div class="evolution-graphic">
+                    <div class="evolution-node">
+                        <div class="evolution-icon">01</div>
+                        <span>Compressed Tissue (Day 1)</span>
+                    </div>
+                    <span class="evolution-arrow" aria-hidden="true">→</span>
+                    <div class="evolution-node">
+                        <div class="evolution-icon">02</div>
+                        <span>Release Initiation (Day 21)</span>
+                    </div>
+                    <span class="evolution-arrow" aria-hidden="true">→</span>
+                    <div class="evolution-node">
+                        <div class="evolution-icon" style="border-color: var(--accent-gold);">03</div>
+                        <span>Responsive Tissue (Month 6)</span>
+                    </div>
+                </div>
+                <div class="evolution-desc">
+                    Moving away from dense fascial plating toward mechanically responsive tissue. Focus rests on restoring independent glide and elastic recoil.
+                </div>
+            </div>
         </section>
 
-        <!-- Friction & Restoration Architecture -->
-        <section>
-            <h2>The Mechanics of Shear: Bound vs. Gliding</h2>
-            <p>When tissue is locked in high friction, movement requires excessive force and generates constant internal drag. Restoring the glide transforms your structural mechanics entirely.</p>
-            
+        <section aria-labelledby="architecture-title">
+            <div class="section-title" id="architecture-title">02 / Comparative Mechanics</div>
             <div class="comparison-grid">
                 <div class="comparison-card" style="border-color: var(--danger-color);">
                     <div class="fan-canvas">
-                        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="45" y="25" width="70" height="110" rx="6" fill="none" stroke="#8b3a3a" stroke-width="2"/>
-                            <line x1="45" y1="50" x2="115" y2="50" stroke="#8b3a3a" stroke-width="1.5"/>
-                            <line x1="45" y1="75" x2="115" y2="75" stroke="#8b3a3a" stroke-width="2"/>
-                            <line x1="45" y1="100" x2="115" y2="100" stroke="#8b3a3a" stroke-width="1.5"/>
-                            <text x="80" y="148" fill="#8b3a3a" font-size="9" font-family="monospace" text-anchor="middle">LOCKED PLANES</text>
+                        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <rect x="30" y="40" width="100" height="80" rx="2" fill="none" stroke="#8b3a3a" stroke-width="2"/>
+                            <line x1="30" y1="60" x2="130" y2="60" stroke="#8b3a3a" stroke-width="1"/>
+                            <line x1="30" y1="80" x2="130" y2="80" stroke="#8b3a3a" stroke-width="1"/>
+                            <line x1="30" y1="100" x2="130" y2="100" stroke="#8b3a3a" stroke-width="1"/>
+                            <line x1="50" y1="40" x2="50" y2="120" stroke="#8b3a3a" stroke-width="1" stroke-dasharray="2 2"/>
+                            <line x1="80" y1="40" x2="80" y2="120" stroke="#8b3a3a" stroke-width="1" stroke-dasharray="2 2"/>
+                            <line x1="110" y1="40" x2="110" y2="120" stroke="#8b3a3a" stroke-width="1" stroke-dasharray="2 2"/>
+                            <text x="80" y="145" fill="#8b3a3a" font-size="9" font-family="monospace" text-anchor="middle">SLAB FASCIA</text>
                         </svg>
                     </div>
-                    <span style="font-size: 0.75rem; color: var(--danger-color); font-family: monospace; display: block; margin-bottom: 0.35rem;">BOUND STATE</span>
-                    <h3>High Slab Friction</h3>
-                    <p>Fascial sheets glued solid. Zero relative motion between layers, resulting in constant internal drag and restriction.</p>
+                    <span class="comparison-label" style="color: var(--danger-color);">TYPICAL TISSUE PATTERN</span>
+                    <h3>Dense &amp; Rigid</h3>
+                    <p>Fascia has adapted to sustained compression by flattening into a load-bearing plate. No mechanical give. No elastic recoil. Tissue resists movement as a solid sheet.</p>
                 </div>
 
-                <div class="comparison-card" style="border-color: var(--accent-color);">
+                <div class="comparison-card" style="border-color: var(--accent-gold);">
                     <div class="fan-canvas">
-                        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M80 20 C105 25 125 50 120 80 C115 110 100 135 80 140 C60 135 45 110 40 80 C35 50 55 25 80 20 Z" fill="none" stroke="#d4af37" stroke-width="2"/>
-                            <circle cx="80" cy="80" r="14" fill="none" stroke="#d4af37" stroke-width="2"/>
-                            <text x="80" y="148" fill="#d4af37" font-size="9" font-family="monospace" text-anchor="middle">FLUID SHEAR</text>
+                        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M40 80 Q60 50 80 60 Q100 70 120 80 Q100 110 80 100 Q60 90 40 80 Z" fill="none" stroke="#d4af37" stroke-width="2"/>
+                            <path d="M50 80 Q70 65 80 72 Q90 79 110 80" fill="none" stroke="#d4af37" stroke-width="1" stroke-dasharray="2 2"/>
+                            <path d="M50 80 Q70 95 80 88 Q90 81 110 80" fill="none" stroke="#d4af37" stroke-width="1" stroke-dasharray="2 2"/>
+                            <circle cx="80" cy="80" r="6" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+                            <text x="80" y="145" fill="#d4af37" font-size="9" font-family="monospace" text-anchor="middle">RESPONSIVE FASCIA</text>
                         </svg>
                     </div>
-                    <span style="font-size: 0.75rem; color: var(--accent-color); font-family: monospace; display: block; margin-bottom: 0.35rem;">RESTORATION STATE</span>
-                    <h3>Gliding Planes Active</h3>
-                    <p>Independent multi-directional layer sliding. Effortless mechanical transmission and restored local fluid exchange.</p>
+                    <span class="comparison-label" style="color: var(--accent-gold);">BALANCED ALIGNMENT</span>
+                    <h3>Adaptive &amp; Resilient</h3>
+                    <p>Tissue retains independent glide and mechanical bounce. Load distributes through micro-movement and elastic recoil rather than rigid resistance.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Origin Section -->
-        <section id="origin">
-            <h2>The Origin: Experience Over Academic Theory</h2>
-            <div class="card">
-                <p>Decades spent navigating consulting rooms and physical specialists revealed a massive blind spot: medicine understands anatomy in isolation, but ignores how layered tissue sheets stick together under load.</p>
-                <p>This protocol is born from direct practical experimentation—mapping how tissue responds to precise mechanical shear and restoring independent gliding capabilities without external clinic reliance.</p>
-                <p style="margin-bottom: 0;">Sovereignty requires mastering your own tissue mechanics.</p>
+        <section aria-labelledby="case-title">
+            <div class="section-title" id="case-title">03 / Case Snapshot</div>
+            <div class="case-snapshot">
+                <blockquote class="case-quote">
+                    "After years of driving and desk work, my outer thighs felt like plywood. I assumed it was muscle tone. This guidance helped me understand that density was fascial plating. The tissue began to soften within six weeks. I could feel individual structures again."
+                </blockquote>
+                <div class="case-author">— Network member, Month 5</div>
             </div>
         </section>
 
-        <!-- Planes & Protocol Section -->
-        <section id="planes">
-            <h2>The Core Gliding Zones &amp; Shear Protocol</h2>
-            <p>Fascial adhesion concentrates heavily where major structural lines intersect. Addressing these zones requires systematic unlaminated pressure rather than generalized stretching.</p>
-            
-            <div class="card">
-                <ul>
-                    <li><strong>1. Cross-Fiber Shear Mapping:</strong> Locate areas where superficial skin and deep fascia move as a single rigid block. Apply opposing lateral pressure to reintroduce independent glide.</li>
-                    <li><strong>2. Fluid Rehydration Under Load:</strong> Use natural body weight movement to pump fresh interstitial fluid back into compressed fascial interfaces, breaking down dry adhesive bonds.</li>
-                </ul>
+        <section id="protocols" aria-labelledby="protocols-title">
+            <div class="section-title" id="protocols-title">04 / Protocol Reference</div>
+            <details class="depth-details">
+                <summary class="depth-summary">
+                    <span>View 7-Step Slab Release Reference Cards</span>
+                    <span class="chevron" aria-hidden="true">▾</span>
+                </summary>
+                <div class="depth-content">
+                    <div class="safety-cards-grid">
+                        <div class="safety-card">
+                            <div class="safety-card-canvas">
+                                <div class="safety-card-step">CARD 01</div>
+                                <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <rect x="35" y="45" width="90" height="70" rx="2" fill="none" stroke="#88888d" stroke-width="1.5"/>
+                                    <line x1="35" y1="65" x2="125" y2="65" stroke="#88888d" stroke-width="1"/>
+                                    <line x1="35" y1="85" x2="125" y2="85" stroke="#88888d" stroke-width="1"/>
+                                    <line x1="35" y1="105" x2="125" y2="105" stroke="#88888d" stroke-width="1"/>
+                                    <line x1="55" y1="45" x2="55" y2="115" stroke="#88888d" stroke-width="1" stroke-dasharray="2 2"/>
+                                    <line x1="80" y1="45" x2="80" y2="115" stroke="#88888d" stroke-width="1" stroke-dasharray="2 2"/>
+                                    <line x1="105" y1="45" x2="105" y2="115" stroke="#88888d" stroke-width="1" stroke-dasharray="2 2"/>
+                                    <rect x="60" y="55" width="40" height="50" rx="2" fill="rgba(212, 175, 55, 0.15)" stroke="#d4af37" stroke-width="1.5"/>
+                                </svg>
+                            </div>
+                            <div class="safety-card-title">1. Surface Mapping</div>
+                            <div class="safety-card-desc">Identifying slab boundaries before attempting deep intervention. Mark the edges where density transitions to normal tissue.</div>
+                        </div>
+
+                        <div class="safety-card">
+                            <div class="safety-card-canvas">
+                                <div class="safety-card-step">CARD 02</div>
+                                <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <rect x="35" y="45" width="90" height="70" rx="2" fill="none" stroke="#88888d" stroke-width="1.5"/>
+                                    <line x1="35" y1="65" x2="125" y2="65" stroke="#88888d" stroke-width="1"/>
+                                    <line x1="35" y1="85" x2="125" y2="85" stroke="#88888d" stroke-width="1"/>
+                                    <line x1="35" y1="105" x2="125" y2="105" stroke="#88888d" stroke-width="1"/>
+                                    <circle cx="80" cy="80" r="18" fill="rgba(212, 175, 55, 0.2)" stroke="#d4af37" stroke-width="1.5"/>
+                                    <path d="M70 80 L90 80 M80 70 L80 90" stroke="#d4af37" stroke-width="1.5"/>
+                                </svg>
+                            </div>
+                            <div class="safety-card-title">2. Heat Penetration</div>
+                            <div class="safety-card-desc">Applying sustained deep heat to increase tissue pliability before manual work. Slab fascia will not release cold.</div>
+                        </div>
+
+                        <div class="safety-card">
+                            <div class="safety-card-canvas">
+                                <div class="safety-card-step">CARD 03</div>
+                                <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <rect x="35" y="45" width="90" height="70" rx="2" fill="none" stroke="#88888d" stroke-width="1.5"/>
+                                    <line x1="35" y1="65" x2="125" y2="65" stroke="#88888d" stroke-width="1"/>
+                                    <line x1="35" y1="85" x2="125" y2="85" stroke="#88888d" stroke-width="1"/>
+                                    <line x1="35" y1="105" x2="125" y2="105" stroke="#88888d" stroke-width="1"/>
+                                    <path d="M35 80 L55 80 M105 80 L125 80" stroke="#d4af37" stroke-width="2"/>
+                                    <path d="M55 75 L55 85 M105 75 L105 85" stroke="#d4af37" stroke-width="1.5"/>
+                                </svg>
+                            </div>
+                            <div class="safety-card-title">3. Edge Entry</div>
+                            <div class="safety-card-desc">Working at the perimeter of the slab rather than attacking the centre. The edges yield first and create a release pathway inward.</div>
+                        </div>
+
+                        <div class="safety-card">
+                            <div class="safety-card-canvas">
+                                <div class="safety-card-step">CARD 04</div>
+                                <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <rect x="35" y="45" width="90" height="70" rx="2" fill="none" stroke="#88888d" stroke-width="1.5"/>
+                                    <line x1="35" y1="65" x2="125" y2="65" stroke="#88888d" stroke-width="1"/>
+                                    <line x1="35" y1="85" x2="125" y2="85" stroke="#88888d" stroke-width="1"/>
+                                    <line x1="35" y1="105" x2="125" y2="105" stroke="#88888d" stroke-width="1"/>
+                                    <path d="M50 60 L110 100 M50 100 L110 60" stroke="#d4af37" stroke-width="1.5" stroke-dasharray="3 3"/>
+                                </svg>
+                            </div>
+                            <div class="safety-card-title">4. Cross-Fibre Disruption</div>
+                            <div class="safety-card-desc">Breaking linear adhesion patterns across the tissue plane. Slab fascia aligns in compression vectors; cross-fibre work interrupts the plate.</div>
+                        </div>
+
+                        <div class="safety-card">
+                            <div class="safety-card-canvas">
+                                <div class="safety-card-step">CARD 05</div>
+                                <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <rect x="35" y="45" width="90" height="70" rx="2" fill="none" stroke="#88888d" stroke-width="1.5"/>
+                                    <line x1="35" y1="65" x2="125" y2="65" stroke="#88888d" stroke-width="1"/>
+                                    <line x1="35" y1="85" x2="125" y2="85" stroke="#88888d" stroke-width="1"/>
+                                    <line x1="35" y1="105" x2="125" y2="105" stroke="#88888d" stroke-width="1"/>
+                                    <path d="M60 80 Q80 60 100 80 Q80 100 60 80" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+                                    <path d="M60 80 Q80 100 100 80" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+                                </svg>
+                            </div>
+                            <div class="safety-card-title">5. Bounce Restoration</div>
+                            <div class="safety-card-desc">Introducing rhythmic pressure to remind tissue of its elastic capacity. The slab has forgotten how to spring back.</div>
+                        </div>
+
+                        <div class="safety-card">
+                            <div class="safety-card-canvas">
+                                <div class="safety-card-step">CARD 06</div>
+                                <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <rect x="35" y="45" width="90" height="70" rx="2" fill="none" stroke="#88888d" stroke-width="1.5"/>
+                                    <line x1="35" y1="65" x2="125" y2="65" stroke="#88888d" stroke-width="1"/>
+                                    <line x1="35" y1="85" x2="125" y2="85" stroke="#88888d" stroke-width="1"/>
+                                    <line x1="35" y1="105" x2="125" y2="105" stroke="#88888d" stroke-width="1"/>
+                                    <path d="M50 80 L70 70 L90 90 L110 80" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+                                    <path d="M50 80 L70 90 L90 70 L110 80" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-dasharray="2 2"/>
+                                </svg>
+                            </div>
+                            <div class="safety-card-title">6. Load Redistribution</div>
+                            <div class="safety-card-desc">Shifting daily mechanical patterns so the slab stops receiving the same compression vector. The plate forms for a reason.</div>
+                        </div>
+
+                        <div class="safety-card-wrapper-full">
+                            <div class="safety-card-full">
+                                <div class="safety-card-canvas">
+                                    <div class="safety-card-step">CARD 07</div>
+                                    <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <rect x="35" y="45" width="90" height="70" rx="2" fill="none" stroke="#d4af37" stroke-width="2"/>
+                                        <line x1="35" y1="65" x2="125" y2="65" stroke="#88888d" stroke-width="1"/>
+                                        <line x1="35" y1="85" x2="125" y2="85" stroke="#88888d" stroke-width="1"/>
+                                        <line x1="35" y1="105" x2="125" y2="105" stroke="#88888d" stroke-width="1"/>
+                                        <path d="M70 80 L80 72 L90 80 L80 88 Z" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+                                        <path d="M80 65 L80 72 M80 88 L80 95" stroke="#d4af37" stroke-width="1"/>
+                                    </svg>
+                                </div>
+                                <div class="safety-card-title">7. Baseline Verification</div>
+                                <div class="safety-card-desc">Monitoring tissue response by touch, using spring-back as the primary indicator. Press and release. You might notice the tissue returning faster than before.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <section aria-labelledby="trajectory-title">
+            <div class="section-title" id="trajectory-title">05 / Progressive Milestones</div>
+            <div class="site-subtitle" style="font-size: 0.9rem; margin-top: -0.5rem;">
+                Individual experiences vary. These are typical reported observations rather than guaranteed outcomes.
+            </div>
+            <div class="trajectory-list">
+                <div class="trajectory-item">
+                    <div class="trajectory-day">Day 1</div>
+                    <div class="trajectory-text">Initial awareness of tissue density patterns through targeted palpation mapping.</div>
+                </div>
+                <div class="trajectory-item">
+                    <div class="trajectory-day">Day 3</div>
+                    <div class="trajectory-text">Early softening at slab edges as heat and disruption protocols take effect.</div>
+                </div>
+                <div class="trajectory-item">
+                    <div class="trajectory-day">Day 21</div>
+                    <div class="trajectory-text">Noticeable increase in tissue give and reduced surface rigidity during daily movement.</div>
+                </div>
+                <div class="trajectory-item">
+                    <div class="trajectory-day">Month 3</div>
+                    <div class="trajectory-text">Significant restoration of fascial glide, lowering the frequency of rigid plate formation.</div>
+                </div>
+                <div class="trajectory-item">
+                    <div class="trajectory-day">Month 6</div>
+                    <div class="trajectory-text">Consistent tissue responsiveness with minimal ongoing maintenance required.</div>
+                </div>
             </div>
         </section>
 
-        <!-- Timeline Section -->
-        <section id="restoration">
-            <h2>The 6-Month Tissue Reclamation Timeline</h2>
-            <p>Restoring fluid movement across locked planes follows a distinct developmental progression as tissue rehydrates and regains independence.</p>
-            
-            <div class="visual-grid">
-                <div class="visual-card">
-                    <span style="font-size: 0.75rem; color: var(--accent-color); font-family: monospace; margin-bottom: 0.25rem;">MONTH 1</span>
-                    <h3>Initial Friction Break</h3>
-                    <p>Breaking the primary surface adhesion lock. Relieving deep internal drag points.</p>
-                </div>
-                <div class="visual-card">
-                    <span style="font-size: 0.75rem; color: var(--accent-color); font-family: monospace; margin-bottom: 0.25rem;">MONTH 2 - 3</span>
-                    <h3>Plane Separation</h3>
-                    <p>Superficial and deep layers begin sliding independently. Local fluid circulation improves.</p>
-                </div>
-                <div class="visual-card">
-                    <span style="font-size: 0.75rem; color: var(--accent-color); font-family: monospace; margin-bottom: 0.25rem;">MONTH 4 - 5</span>
-                    <h3>Shear Integration</h3>
-                    <p>Movement transmission becomes effortless across major torso and limb junctions.</p>
-                </div>
-                <div class="visual-card">
-                    <span style="font-size: 0.75rem; color: var(--accent-color); font-family: monospace; margin-bottom: 0.25rem;">MONTH 6</span>
-                    <h3>Full Sovereign Glide</h3>
-                    <p>Permanent restoration of multi-directional tissue mobility and fluid baseline homeostasis.</p>
+        <section aria-labelledby="network-title">
+            <div class="cluster-title" id="network-title">Related Network Nodes</div>
+            <div class="node-cluster-bar">
+                <div class="pill-grid">
+                    <a href="https://back.guide" class="pill">back.guide</a>
+                    <a href="https://legs.guide" class="pill">legs.guide</a>
+                    <a href="https://flareup.guide" class="pill">flareup.guide</a>
+                    <a href="https://compressed.guide" class="pill">compressed.guide (Hub)</a>
                 </div>
             </div>
         </section>
 
-        <!-- Pricing & CTA -->
-        <section id="pricing">
-            <h2>The Sovereign Network Hub &amp; Pricing Policy</h2>
-            <p>Engineered with dry British precision. When you are ready to dismantle slab friction and restore independent gliding planes across your frame, engage the study portal.</p>
-            
-            <div class="cta-box">
-                <h3>Unlock Tissue Restoration</h3>
-                <p>Direct, uncompromised access to deep tissue unspooling frameworks and plane restoration protocols.</p>
-                <div class="pricing-tag">€60 / 365 Days — Zero Auto-Renewals</div>
-                <p style="font-size: 0.85rem; margin-top: 0.75rem; color: var(--text-secondary);">Pricing Policy: One flat annual fee. No hidden subscription traps, no surprise recurring billing, and zero automatic renewals.</p>
-                <br>
-                <button class="btn" id="openPortalBtn" type="button">Engage the Study Portal</button>
+        <section id="about" aria-labelledby="about-title">
+            <div class="section-title" id="about-title">06 / About James &amp; Background</div>
+            <div class="text-block">
+                <p>Operated independently from Tenerife. Previously based in Manchester, rural Scotland, Dubai, and Cape Town. The Canary Islands were a lockdown miscalculation that turned out to be structurally useful.</p>
+                <p>I spent fifteen years running the largest travel recruitment business globally. That meant managing human load across time zones and nationalities. The same principles apply to fascia: understand the system, then intervene precisely.</p>
+                <p>I am usually ahead of the curve on mechanics and behind the curve on social media. Contentment is balance. The goal is for every man to operate as the best version of his own structure.</p>
+                <p>Not everyone has access to a Canary Islands climate. Deep heat penetration matters: long showers, baths, saunas, steam rooms, jacuzzis. Self-massage has the secondary benefit of dramatically improving grip strength. Your ability to move with ease improves in parallel.</p>
+                <p>I work from the members-only coffee shops here in Tenerife as much as I work on my own recalibration. If this is available to you, I have found Sativa and Indica strains to be effective lubricants for fascial release work, combined with heat, movement, and massage.</p>
             </div>
         </section>
 
-        <section id="legal" style="margin-top: 4rem; border-top: 1px solid var(--surface-border); padding-top: 2rem;">
-            <h2>Terms, Conditions &amp; Policies</h2>
-            <h3 style="font-size: 1.1rem; color: var(--text-primary); margin-top: 1.5rem; margin-bottom: 0.5rem;">Terms &amp; Conditions</h3>
-            <p style="font-size: 0.95rem;">By accessing slabfascia.guide, you operate under your own sovereign authority. Protocols are educational frameworks for self-treatment and do not constitute formal medical diagnosis.</p>
-            <h3 style="font-size: 1.1rem; color: var(--text-primary); margin-top: 1.5rem; margin-bottom: 0.5rem;">Privacy Policy</h3>
-            <p style="font-size: 0.95rem;">Absolute data privacy is foundational. Zero tracking pixels, no intrusive third-party cookies, and no data harvesting.</p>
-            <h3 style="font-size: 1.1rem; color: var(--text-primary); margin-top: 1.5rem; margin-bottom: 0.5rem;">Refund Policy</h3>
-            <p style="font-size: 0.95rem;">Annual access fees are final upon activation due to the immediate digital delivery of unspooling frameworks.</p>
+        <section id="access" aria-labelledby="access-title">
+            <div class="section-title" id="access-title">07 / Network Access</div>
+            <div class="access-card">
+                <div class="access-title">Transparent Terms. No Auto-Renewal.</div>
+                <div class="access-desc">
+                    Your initial consultation is complimentary. Full annual network access is available for €50 / $65 / £50 for 365 days, with no automatic renewal. Access concludes at the end of the term unless manually renewed.
+                </div>
+                <a href="mailto:james@compressed.guide?subject=Network%20Access%20Request" class="cta-btn">Unlock 365 Days (€50 / $65 / £50) —</a>
+            </div>
         </section>
-    </main>
+    </div>
 
     <footer>
-        <div class="footer-content">
-            <div>Part of the Sovereign Network Ecosystem &bull; Built by James</div>
-            <div class="footer-links">
-                <a href="#friction">Friction</a>
-                <a href="#planes">Gliding Planes</a>
-                <a href="#origin">The Origin</a>
-                <a href="#pricing">Pricing Policy</a>
-                <a href="#legal">Privacy</a>
-                <a href="#legal">Terms</a>
-                <a href="#legal">Refunds</a>
-            </div>
+        <span>Operated independently from Tenerife. Specialist node of compressed.guide.</span>
+        <div>
+            <a href="https://compressed.guide">Master Hub</a>
+            <a href="mailto:james@compressed.guide?subject=Privacy%20and%20Terms%20Inquiry">Privacy &amp; Terms</a>
         </div>
-        <div style="font-size: 0.8rem; color: var(--text-secondary);">Minimalist Architecture &bull; No Tracking Pixels &bull; Absolute Sovereignty</div>
     </footer>
-</div>
 
-<!-- Immersive Full-Screen Practice Portal -->
-<div class="immersive-portal" id="immersivePortal">
-    <div class="portal-header">
-        <div class="portal-title">Sovereign Network &bull; Architectural Study</div>
-        <button class="portal-exit" id="closePortalBtn" type="button">Return to Guide</button>
-    </div>
-    <div class="portal-body">
-        <div class="portal-feed" id="portalFeed">
-            <div class="portal-message system">
-                <strong>The Architect:</strong> Sovereign session initialized. Context is maintained across the network matrix. State your tissue restriction or gliding plane query.
-            </div>
-        </div>
-    </div>
-    <div class="portal-input-container">
-        <div style="width: 100%; max-width: var(--max-width); margin: 0 auto; display: flex; gap: 0.75rem; padding: 0 1rem;">
-            <textarea class="portal-textarea" id="portalInput" placeholder="Describe your tissue friction or restriction..."></textarea>
-            <button class="portal-submit" id="portalSubmit" type="button">Engage</button>
-        </div>
-    </div>
-</div>
+    <script src="/network-config.js"></script>
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', isOpen);
+            navToggle.textContent = isOpen ? 'Close' : 'Menu';
+        });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+                navToggle.setAttribute('aria-expanded', 'false');
+                navToggle.textContent = 'Menu';
+            });
+        });
 
-<script>
-    (function() {
-        const openBtn = document.getElementById('openPortalBtn');
-        const portal = document.getElementById('immersivePortal');
-        const closeBtn = document.getElementById('closePortalBtn');
-        const submitBtn = document.getElementById('portalSubmit');
-        const inputField = document.getElementById('portalInput');
-        const feedContainer = document.getElementById('portalFeed');
+        const config = window.NETWORK_CONFIG || {};
+        const API_URL = config.apiEndpoint || 'https://compressed.guide/api/consult';
+        const SITE_ID = config.siteId || 'slabfascia.guide';
+        const STORAGE_KEY = SITE_ID.replace(/\./g, '_') + '_chat';
 
-        let userUuid = localStorage.getItem('sovereign_user_uuid') || 'user_' + Math.random().toString(36).substring(2, 11);
-        localStorage.setItem('sovereign_user_uuid', userUuid);
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const suggestionChips = document.querySelectorAll('.suggestion-chip');
+        const typingIndicator = document.getElementById('typingIndicator');
 
-        function togglePortal(e) {
-            if (e) e.preventDefault();
-            portal.classList.toggle('active');
-            if (portal.classList.contains('active')) {
-                inputField.focus();
+        let chatHistory = [];
+        try {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            chatHistory = stored ? JSON.parse(stored) : [];
+        } catch {
+            chatHistory = [];
+        }
+
+        function renderHistory() {
+            if (chatHistory.length === 0) return;
+            chatMessages.innerHTML = '';
+            chatHistory.forEach(msg => {
+                const div = document.createElement('div');
+                div.className = `message ${msg.sender}`;
+                div.textContent = msg.text;
+                chatMessages.appendChild(div);
+            });
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        renderHistory();
+
+        function appendMessage(text, sender) {
+            const div = document.createElement('div');
+            div.className = `message ${sender}`;
+            div.textContent = text;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            chatHistory.push({ text, sender, time: Date.now() });
+            if (chatHistory.length > 50) chatHistory.shift();
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(chatHistory));
+            } catch (e) {}
+        }
+
+        function setTyping(active) {
+            typingIndicator.classList.toggle('active', active);
+            if (active) {
+                chatMessages.parentNode.insertBefore(typingIndicator, chatMessages.nextSibling);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
             }
         }
 
-        if (openBtn) openBtn.addEventListener('click', togglePortal);
-        if (closeBtn) closeBtn.addEventListener('click', () => portal.classList.remove('active'));
+        function setLoading(loading) {
+            sendBtn.disabled = loading;
+            sendBtn.textContent = loading ? 'Thinking...' : 'Send';
+        }
 
-        async function handlePortalMessage() {
-            const text = inputField.value.trim();
+        async function handleSend(customText) {
+            const text = (typeof customText === 'string' ? customText : chatInput.value).trim();
             if (!text) return;
-
-            const userDiv = document.createElement('div');
-            userDiv.className = 'portal-message user';
-            userDiv.textContent = text;
-            feedContainer.appendChild(userDiv);
-            inputField.value = '';
-            portal.scrollTo({ top: portal.scrollHeight, behavior: 'smooth' });
-
-            const loadingDiv = document.createElement('div');
-            loadingDiv.className = 'portal-message system';
-            loadingDiv.innerHTML = '<strong>The Architect:</strong> Analyzing tissue mechanics across network matrix...';
-            feedContainer.appendChild(loadingDiv);
-            portal.scrollTo({ top: portal.scrollHeight, behavior: 'smooth' });
+            appendMessage(text, 'user');
+            if (typeof customText !== 'string') chatInput.value = '';
+            chatInput.style.height = 'auto';
+            setLoading(true);
+            setTyping(true);
 
             try {
-                const response = await fetch('/api/chat', {
+                const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        siteId: 'slabfascia.guide',
                         message: text,
-                        uuid: userUuid
+                        history: chatHistory.slice(-10).map(m => ({ text: m.text, sender: m.sender })),
+                        siteId: SITE_ID
                     })
                 });
-
+                if (!response.ok) throw new Error('API route unavailable');
                 const data = await response.json();
-                loadingDiv.remove();
-
-                const systemDiv = document.createElement('div');
-                systemDiv.className = 'portal-message system';
-                systemDiv.innerHTML = `<strong>The Architect:</strong> ${data.message || 'Error processing request.'}`;
-                feedContainer.appendChild(systemDiv);
-                portal.scrollTo({ top: portal.scrollHeight, behavior: 'smooth' });
+                setTyping(false);
+                appendMessage(data.reply, 'assistant');
             } catch (err) {
-                loadingDiv.remove();
-                const errDiv = document.createElement('div');
-                errDiv.className = 'portal-message system';
-                errDiv.innerHTML = '<strong>The Architect:</strong> Connection error across network matrix. Verify worker bindings.';
-                feedContainer.appendChild(errDiv);
-                portal.scrollTo({ top: portal.scrollHeight, behavior: 'smooth' });
+                await new Promise(r => setTimeout(r, 600));
+                setTyping(false);
+                const lower = text.toLowerCase();
+                let fallbackReply = "I'm having trouble reaching the advisory node right now. Ensure you are shifting positions regularly, and consult a qualified professional for persistent pain.";
+
+                if (lower.includes('slab') || lower.includes('plate') || lower.includes('flat')) {
+                    fallbackReply = "Press your thumb into your outer thigh. You might feel a solid plate with no give. That is slab fascia. Try the same after a long hot shower. You might notice the edge softens first. Work the perimeter, not the centre.";
+                } else if (lower.includes('dense') || lower.includes('density') || lower.includes('hard')) {
+                    fallbackReply = "Dense fascia is not muscle tone. It is tissue that has flattened under sustained compression. Try the Chinese burn test on your wrist first. You might feel objects inside. Then press your thigh. If you feel nothing but wall, that is the slab.";
+                } else if (lower.includes('rigid') || lower.includes('stiff') || lower.includes('plywood')) {
+                    fallbackReply = "Tissue that feels like plywood has lost its elastic recoil. Try bounce restoration: press rhythmically at the slab edge and observe whether the tissue begins to spring back. This reminds the fascia of its mechanical capacity.";
+                } else if (lower.includes('release') || lower.includes('soften') || lower.includes('soft')) {
+                    fallbackReply = "Slab release starts at the edges, not the centre. Apply deep heat first. Then work cross-fibre across the plate boundary. You might feel the tissue begin to separate into distinct layers. That is the first sign of responsiveness returning.";
+                } else if (lower.includes('edge') || lower.includes('boundary') || lower.includes('perimeter')) {
+                    fallbackReply = "The slab perimeter is where normal tissue meets dense plating. It yields first. Start there and work inward. You might feel a distinct line where the tissue changes character. Follow that line.";
+                } else if (lower.includes('bounce') || lower.includes('recoil') || lower.includes('spring')) {
+                    fallbackReply = "Responsive fascia springs back when pressed. Slab fascia does not. Try rhythmic pressure at the edge of the dense area. You might notice the tissue gradually remembering its elastic capacity over several sessions.";
+                } else if (lower.includes('heat') || lower.includes('sauna') || lower.includes('bath') || lower.includes('shower')) {
+                    fallbackReply = "Deep heat penetration accelerates fascial release. Long showers, baths, saunas, steam rooms, jacuzzis. Slab fascia will not release cold. Combine with self-massage and observe how grip strength improves alongside tissue glide.";
+                } else if (lower.includes('cross') || lower.includes('fibre') || lower.includes('fiber')) {
+                    fallbackReply = "Cross-fibre disruption breaks the linear adhesion patterns that hold the slab together. Work perpendicular to the densest line. You might feel the tissue separate into distinct layers.";
+                } else if (lower.includes('map') || lower.includes('mapping')) {
+                    fallbackReply = "Surface mapping means identifying where the slab begins and ends before you intervene. Press systematically across the area. You might feel a distinct transition from soft to solid. Mark that boundary mentally.";
+                } else if (lower.includes('load') || lower.includes('compression') || lower.includes('vector')) {
+                    fallbackReply = "The slab formed for a reason: sustained compression along a single vector. Identify the daily pattern that creates it. Driving? Desk work? Standing in one position? Shift the load and the plate stops thickening.";
+                } else if (lower.includes('grip') || lower.includes('massage')) {
+                    fallbackReply = "Self-massage improves grip strength dramatically. The same hand mechanics that release slab tethering also retrain forearm and hand architecture. Two systems, one intervention.";
+                } else if (lower.includes('progress') || lower.includes('sign') || lower.includes('responsive')) {
+                    fallbackReply = "Signs of progress include faster spring-back when pressed, visible separation of tissue layers, and the ability to feel distinct structures within what was previously a solid plate. Track by touch daily.";
+                } else if (lower.includes('chinese') || lower.includes('burn')) {
+                    fallbackReply = "Give yourself a quick Chinese burn with a warm hand. You might feel objects inside the wrist. This same tactile clarity applies to fascial mapping in dense tissue. If you feel only wall, you are pressing on a slab.";
+                } else if (lower.includes('concertina')) {
+                    fallbackReply = "Push from the ankle up the calf. You might see concertinaed skin, almost with a shine. When that concertinaing flattens into a solid sheet, the fascia has slabbed. It can be reversed.";
+                } else if (lower.includes('eyebrow')) {
+                    fallbackReply = "Warm water. Two hands for 15 seconds. Apply for 42 seconds. Gently move for 3 seconds. You may feel an indentation where your fingers were, a chemical rush, and release. Follow the bone connections — forehead, then whole head. This cranial release mirrors the slab release pattern.";
+                } else if (lower.includes('ear') || lower.includes('ring')) {
+                    fallbackReply = "Take a look at the rim of your ear. You might notice a ring. This is an observational marker of systemic fascial state. It often changes as slab density reduces.";
+                }
+
+                appendMessage(fallbackReply, 'assistant');
+            } finally {
+                setLoading(false);
             }
         }
 
-        if (submitBtn) submitBtn.addEventListener('click', handlePortalMessage);
-        if (inputField) {
-            inputField.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    handlePortalMessage();
-                }
-            });
-        }
-    })();
-</script>
-
+        sendBtn.addEventListener('click', () => handleSend());
+        chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleSend();
+            }
+        });
+        chatInput.addEventListener('input', () => {
+            chatInput.style.height = 'auto';
+            chatInput.style.height = chatInput.scrollHeight + 'px';
+        });
+        suggestionChips.forEach(chip => {
+            chip.addEventListener('click', () => handleSend(chip.getAttribute('data-prompt')));
+        });
+    </script>
 </body>
 </html>
